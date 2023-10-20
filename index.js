@@ -5,11 +5,10 @@ import soundPlayer from 'play-sound';
 
 const player = soundPlayer();
 
-
 let lastWakeUpTimeout;
 let lastGoToBedTimeout;
 let lastWaitingForNextDayTimeout;
-let rejectWaitingForNextDay;
+let rejectWaitingForNextDay = () => console.log('rejectWaitingForNextDay is not set');
 let shouldExit = false;
 
 process.on('SIGINT', () => {
