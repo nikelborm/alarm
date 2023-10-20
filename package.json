@@ -1,0 +1,27 @@
+{
+  "name": "alarm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch --env-file .env index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nikelborm/alarm.git"
+  },
+  "keywords": [
+    "alarm"
+  ],
+  "author": "nikelborm",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nikelborm/alarm/issues"
+  },
+  "homepage": "https://github.com/nikelborm/alarm#readme",
+  "dependencies": {
+    "play-sound": "^1.1.6"
+  }
+}
