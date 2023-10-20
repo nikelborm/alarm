@@ -5,7 +5,7 @@ export const fetchWeatherApi = async (relativePath, searchParams) => {
 
   url.search = new URLSearchParams({
     ...searchParams,
-    appid: process.env.OPEN_WEATHER_API_KEY,
+    appid: process.env.OPEN_WEATHER_MAP_API_KEY,
   });
 
   const res = await fetch(url);

@@ -23,10 +23,14 @@ process.on('SIGINT', () => {
 
 
 while(!shouldExit) {
-  const {
-    sunrise,
-    sunset,
-  } = await fetchSunriseAndSunset(process.env.LOCATION_CITY);
+  let sunrise, sunset;
+  try {
+    ({ sunrise, sunset } =
+      await fetchSunriseAndSunset(process.env.LOCATION_CITY));
+  } catch (error) {
+    console.error('Error while fetching occurred:', error);
+    continue;
+  }
 
   const now = new Date();
   const timeToSunrise = sunrise - now;

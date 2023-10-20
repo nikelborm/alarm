@@ -5,7 +5,7 @@ This script fetches the sunrise and sunset times for a specific location and sch
 ## Env
 To use this project, you will need to set the following environment variables in a `.env` file:
 
-- `OPENWEATHERMAP_API_KEY`: Your API key for the OpenWeatherMap API.
+- `OPEN_WEATHER_MAP_API_KEY`: Your API key for the OpenWeatherMap API.
 - `LOCATION_CITY`: The name of the city for which you want to fetch the sunrise and sunset times.
 - `PATH_TO_WAKE_UP_SOUND_FILE`: The path to the sound file that should be played when it's time to wake up.
 
