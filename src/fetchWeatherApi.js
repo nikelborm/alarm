@@ -3,7 +3,10 @@
 export const fetchWeatherApi = async (relativePath, searchParams) => {
   const url = new URL(relativePath, "https://api.openweathermap.org/");
 
-  url.search = new URLSearchParams(searchParams);
+  url.search = new URLSearchParams({
+    ...searchParams,
+    appid: process.env.OPEN_WEATHER_API_KEY,
+  });
 
   const res = await fetch(url);
 

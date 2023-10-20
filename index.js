@@ -8,16 +8,16 @@ const player = soundPlayer();
 
 let lastWakeUpTimeout;
 let lastGoToBedTimeout;
-let lastGlobalTimeout;
-let lastGlobalReject;
+let lastWaitingForNextDayTimeout;
+let rejectWaitingForNextDay;
 let shouldExit = false;
 
 process.on('SIGINT', () => {
   clearTimeout(lastWakeUpTimeout);
   clearTimeout(lastGoToBedTimeout);
-  clearTimeout(lastGlobalTimeout);
+  clearTimeout(lastWaitingForNextDayTimeout);
   shouldExit = true;
-  lastGlobalReject();
+  rejectWaitingForNextDay();
   console.log('Received SIGINT. Exiting...');
 });
 
@@ -26,17 +26,15 @@ while(!shouldExit) {
   const {
     sunrise,
     sunset,
-  } = await fetchSunriseAndSunset('Ростов на дону');
+  } = await fetchSunriseAndSunset(process.env.LOCATION_CITY);
 
   const now = new Date();
   const timeToSunrise = sunrise - now;
   const timeToSunset = sunset - now;
 
-  const millisecondsInOneDay = 1000;
-
   lastWakeUpTimeout = setTimeout(() => {
     console.log('Wake up!');
-    player.play('./sounds/Keanu_Cyberpunk_2077.mp3', (err) => {
+    player.play(process.env.PATH_TO_WAKE_UP_SOUND_FILE, (err) => {
       if (err) console.log(`Could not play sound: ${err}`);
     });
   }, timeToSunrise);
@@ -49,8 +47,9 @@ while(!shouldExit) {
 
   await (
     new Promise((resolve, reject) => {
-      lastGlobalReject = reject;
-      lastGlobalTimeout = setTimeout(() => resolve(), millisecondsInOneDay)
+      rejectWaitingForNextDay = reject;
+      const millisecondsInOneDay = 24 * 60 * 60 * 1000;
+      lastWaitingForNextDayTimeout = setTimeout(() => resolve(), millisecondsInOneDay)
     })
   ).then(
     () => console.log('Day passed. Repeating planning...'),
