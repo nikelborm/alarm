@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/nikelborm/alarm#readme",
   "dependencies": {
+    "node-fetch": "^3.3.2",
     "play-sound": "^1.1.6"
   }
 }

@@ -1,5 +1,7 @@
 "use strict";
 
+import fetch from 'node-fetch';
+
 export const fetchWeatherApi = async (relativePath, searchParams) => {
   const url = new URL(relativePath, "https://api.openweathermap.org/");
 
